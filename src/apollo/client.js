@@ -1,24 +1,29 @@
-import React from 'react'
-import fetch from 'unfetch'
-import { ApolloProvider as Provider } from 'react-apollo'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { toast } from 'react-toastify'
-import { createUploadLink } from 'apollo-upload-client'
+import React from "react"
+import fetch from "unfetch"
+import { ApolloProvider as Provider } from "react-apollo"
+import { InMemoryCache } from "apollo-cache-inmemory"
+import { ApolloClient } from "apollo-client"
+import { ApolloLink } from "apollo-link"
+import { setContext } from "apollo-link-context"
+import { onError } from "apollo-link-error"
+import { toast } from "react-toastify"
+import { createUploadLink } from "apollo-upload-client"
 
 export default ({ children }) => {
+  // const httpLink = createUploadLink({
+  //   fetch,
+  //   uri: 'https://rickandmortyapi-gql.now.sh/',
+  // })
+
   const httpLink = createUploadLink({
     fetch,
-    uri: 'https://rickandmortyapi-gql.now.sh/',
+    uri: "http://localhost:4000/",
   })
 
   const errorLink = onError(({ networkError, graphQLErrors }) => {
     if (graphQLErrors) {
       toast.error(
-        'There was an error while trying to connect to the server, please try again',
+        "There was an error while trying to connect to the server, please try again",
         {
           position: toast.POSITION.TOP_CENTER,
         }
